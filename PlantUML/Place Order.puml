@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+autonumber
+actor server
+
+participant "Till : ServerView" as view
+participant "restaurant : Restaurant " as restaurant
+participant "order : OrderController" as controller
+participant "tc : TableController" as tc
+participant "order : Order" as order
+participant "item : OrderItem" as item
+
+
+server -> view ++: Place Order
+view -> controller ++: update_order()
+controller -> order ++: place_new_orders()
+
+loop item in unordered_items()
+    order-> item ++: mark_as_ordered()
+end
+create tc
+controller --> tc ++: (view, restaurant, table)
+controller -> view ++: set_controller(tc)
+
+view -> view : controller = controller
+
+
+view -> view : controller = controller
+
+view -> restaurant ++: notify_view()
+
+
+/'
+
+Add in an update to how we need to add the item to the kitchen view
+
+'/
+
+@enduml

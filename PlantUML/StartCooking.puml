@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor Cook
+participant "view : KitchenView" as view
+participant "controller : KitchenController" as controller
+
+Cook -> view ++: Start Cooking
+
+view ->controller++: CookItem
+
+controller->order: Mark_As_Cooking
+
+
+/'
+update the button in the kitchen view
+update The buttons in the server view
+
+
+'/
+
+
+
+
+
+
+@enduml

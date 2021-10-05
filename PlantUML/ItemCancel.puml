@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+autonumber
+actor server
+
+participant "view : ServerView" as view
+participant "restaurant : Restaurant " as restaurant
+participant "order : OrderController" as controller
+participant "tc : TableController" as tc
+participant "order : Order" as order
+participant "items : List[OrderItem]" as items
+
+
+server -> view ++: Cancel Item
+view -> controller ++: cancel_changes()
+controller -> order ++: remove_unordered_items()
+
+
+loop item in unordered_items()
+    order-> items ++: mark_as_ordered()
+end
+create tc
+controller --> tc ++: (view, restaurant, table)
+controller -> view ++: set_controller(tc)
+
+view -> view : controller = controller
+
+view -> restaurant ++: notify_view()
+
+@enduml

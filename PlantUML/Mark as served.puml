@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+
+
+Cook -> view ++:Mark As Served
+
+view ->controller++:
+
+controller->order: Mark_As_Cooking
+
+
+/'
+For this one, all we need to do is have the order removed from the queue
+
+
+'/
+
+
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
