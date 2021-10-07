@@ -4,8 +4,8 @@
 
 actor Cook
 participant "view : KitchenView" as view
+participant "restaurant"
 participant "controller : KitchenController" as controller
-participant "kc : KitchenController" as kc
 
 participant "order : Order" as order
 participant "item : OrderItem" as items
@@ -13,27 +13,11 @@ participant "item : OrderItem" as items
 Cook -> view ++ : Mark As Served
 view ->controller++: has_been_served(OrderItem)
 controller -> order++: has_been_served(OrderItem)
-order -> order: remove(OrderItem)
 order-> items++: has_been_served()
-order--
-create kc
-controller --> kc++: (view, restaurant, kitchen)
-
-controller -->view++: set_controller(kc)
-view->kc: create_ui()
-kc->view++: create_kitchen_order_ui()
+order -> order: remove(OrderItem)
 
 
-
-
-
-
-
-/'
-For this one, all we need to do is have the order removed from the queue
-
-
-'/
+view->restaurant++: notify_view()
 
 
 @enduml
