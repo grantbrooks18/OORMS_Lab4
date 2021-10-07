@@ -1,12 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
-autonumber
+
 actor server
 
 participant "view : ServerView" as view
 participant "restaurant : Restaurant " as restaurant
-participant "order : OrderController" as controller
+participant "controller : OrderController" as controller
 participant "tc : TableController" as tc
 participant "order : Order" as order
 participant "items : List[OrderItem]" as items
