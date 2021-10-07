@@ -3,12 +3,12 @@
 !include style.puml
 
 actor Cook
-participant "view : KitchenView" as view
+participant "view : \nKitchenView" as view
 participant "restaurant"
-participant "controller : KitchenController" as controller
+participant "controller : \nKitchenController" as controller
 
-participant "order : Order" as order
-participant "item : OrderItem" as items
+participant "order : \nOrder" as order
+participant "item : \nOrderItem" as items
 
 Cook -> view ++ : Mark As Served
 view ->controller++: has_been_served(OrderItem)
