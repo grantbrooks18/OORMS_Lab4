@@ -30,11 +30,4 @@ view -> view : controller = controller
 
 view -> restaurant ++: notify_view()
 
-
-/'
-
-Add in an update to how we need to add the item to the kitchen view
-
-'/
-
 @enduml
