@@ -16,15 +16,18 @@ server -> view ++: Cancel Item
 view -> controller ++: cancel_changes()
 controller -> order ++: remove_unordered_items()
 
+order -> items : remove_item
 
-loop item in unordered_items()
-    order-> items ++: mark_as_ordered()
-end
-create tc
-controller --> tc ++: (view, restaurant, table)
-controller -> view ++: set_controller(tc)
-
-view -> view : controller = controller
+'So, I misunderstood this one. It was supposed to be the
+'little cancel, not the main cancel on the bottom.
+'loop item in unordered_items()
+'    order-> items ++: mark_as_ordered()
+'end
+'create tc
+'controller --> tc ++: (view, restaurant, table)
+'controller -> view ++: set_controller(tc)
+'
+'view -> view : controller = controller
 
 view -> restaurant ++: notify_view()
 
