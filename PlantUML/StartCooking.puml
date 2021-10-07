@@ -1,26 +1,18 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
+'autonumber
 actor Cook
-participant "view : KitchenView" as view
-participant "controller : KitchenController" as controller
+participant "view :\n KitchenView" as view
+participant "restaurant :\n  Restaurant " as restaurant
+participant "controller :\n KitchenController" as controller
+participant "order :\nOrder" as order
+
 
 Cook -> view ++: Start Cooking
-
 view ->controller++: CookItem
-
-controller->order: Mark_As_Cooking
-
-
-/'
-update the button in the kitchen view
-update The buttons in the server view
-
-
-'/
-
-
+controller->order --: Mark_As_Cooking()
+view -> restaurant ++: notify_view()
 
 
 
