@@ -7,9 +7,7 @@ actor server
 participant "view :\n  ServerView" as view
 participant "restaurant :\n  Restaurant " as restaurant
 participant "order :\n OrderController" as controller
-participant "tc :\n TableController" as tc
 participant "order :\nOrder" as order
-participant "items :\nList[OrderItem]" as items
 participant "Dish : \nOrderItem" as OrderItem
 
 
@@ -18,7 +16,7 @@ view -> controller ++: cancel_changes()
 controller -> order ++: remove_unordered_items()
 order -> OrderItem ++: cancelable = can_be_cancelled()
 OrderItem -> order --: Return true
-order -> items --: remove_item()
+order -> order : remove_item()
 
 
 

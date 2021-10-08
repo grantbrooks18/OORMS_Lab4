@@ -1,27 +1,71 @@
 @startuml
 'https://plantuml.com/class-diagram
 !include style.puml
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+class "ServerView" as view {
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
+update_order()
+set_controller()
 
-class ArrayList {
-Object[] elementData
-size()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class "Restaurant" as resto{
+
+notify_view()
+
 }
+
+class "OrderController" as ordercont{
+
+cancel_changes()
+update_order()
+
+
+}
+
+class "TableController" as cont{
+
+create_ui()
+
+}
+
+class "Order" as order{
+
+remove_unordered_items()
+has_been_served()
+place_new_orders()
+mark_as_cooking()
+remove_item()
+
+}
+
+class "OrderItem" as item{
+can_be_cancelled()
+has_been_served()
+mark_as_ordered()
+
+}
+
+class " KitchenController" as kcont{
+has_been_served()
+cook_item()
+
+}
+
+resto<--view : restaurant
+
+resto<--cont : restaurant
+resto<--kcont : restaurant
+resto<--ordercont : restaurant
+order<--ordercont : order
+
+view<--kcont : view
+view<--ordercont : view
+view<--cont :view
+
+order-->item : 0...*
+
+
+
 
 @enduml
