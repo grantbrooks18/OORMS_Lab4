@@ -3,7 +3,7 @@
 !include style.puml
 
 title Updated Class Diagram
-
+header Brooks and MacDonald
 class "ServerView" as view {
 
 update_order()

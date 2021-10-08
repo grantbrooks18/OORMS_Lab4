@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
+header Brooks and MacDonald
 title Start Cooking
 actor Cook
 participant "view :\n KitchenView" as view

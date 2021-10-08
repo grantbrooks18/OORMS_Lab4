@@ -1,7 +1,9 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
+header Brooks and MacDonald
 title Place Order
+
 actor server
 
 participant "Till :\n ServerView" as view
