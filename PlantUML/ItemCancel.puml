@@ -9,7 +9,7 @@ participant "view :\n  ServerView" as view
 participant "restaurant :\n  Restaurant " as restaurant
 participant "order :\n OrderController" as controller
 participant "order :\nOrder" as order
-participant "Dish : \nOrderItem" as OrderItem
+participant "item : \nOrderItem" as OrderItem
 
 
 server -> view ++: Cancel Item
