@@ -2,6 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include style.puml
 'autonumber
+title Cancel Item
 actor server
 
 participant "view :\n  ServerView" as view

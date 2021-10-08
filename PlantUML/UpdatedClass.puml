@@ -2,6 +2,8 @@
 'https://plantuml.com/class-diagram
 !include style.puml
 
+title Updated Class Diagram
+
 class "ServerView" as view {
 
 update_order()
@@ -64,8 +66,4 @@ view<--ordercont : view
 view<--cont :view
 
 order-->item : 0...*
-
-
-
-
 @enduml

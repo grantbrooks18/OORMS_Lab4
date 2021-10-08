@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
-'autonumber
+title Start Cooking
 actor Cook
 participant "view :\n KitchenView" as view
 participant "restaurant :\n  Restaurant " as restaurant
