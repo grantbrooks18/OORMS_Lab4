@@ -12,7 +12,7 @@ set_controller()
 }
 
 class "Restaurant" as resto{
-
+attribute
 notify_view()
 
 }
@@ -54,7 +54,7 @@ cook_item()
 
 }
 
-resto<--view : restaurant
+resto<-view : restaurant
 
 resto<--cont : restaurant
 resto<--kcont : restaurant

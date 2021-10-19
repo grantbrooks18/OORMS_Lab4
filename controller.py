@@ -66,4 +66,6 @@ class KitchenController(Controller):
 
     # TODO: implement a method to handle button presses on the KitchenView
 
-    #
+    def cook_item(self, item, order):
+        self.order = order
+        self.order.mark_as_cooking(item)

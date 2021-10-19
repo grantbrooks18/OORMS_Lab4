@@ -64,6 +64,9 @@ class Order:
     def total_cost(self):
         return sum((item.details.price for item in self.items))
 
+    def mark_as_cooking(self, item):
+        item.state = "COOKING"
+
 
 class OrderItem:
 
@@ -71,19 +74,25 @@ class OrderItem:
     def __init__(self, menu_item):
         self.details = menu_item
         self.__ordered = False
+        self.state = ""
 
     def mark_as_ordered(self):
         self.__ordered = True
+        self.state = "PLACED"
 
     def has_been_ordered(self):
         return self.__ordered
 
     def has_been_served(self):
         # TODO: correct implementation based on item state
+        if self.state == "SERVED":
+            return True
         return False
 
     def can_be_cancelled(self):
         # TODO: correct implementation based on item state
+        if self.state == "PLACED":
+            return True
         return True
 
 
