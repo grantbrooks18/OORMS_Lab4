@@ -67,6 +67,8 @@ class Order:
     def mark_as_cooking(self, item):
         item.state = "COOKING"
 
+    def mark_as_served(self, item):
+        item.state = "SERVED"
 
 class OrderItem:
 
@@ -93,7 +95,7 @@ class OrderItem:
         # TODO: correct implementation based on item state
         if self.state == "PLACED":
             return True
-        return True
+        return False
 
 
 class MenuItem:

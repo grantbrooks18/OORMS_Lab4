@@ -66,6 +66,20 @@ class KitchenController(Controller):
 
     # TODO: implement a method to handle button presses on the KitchenView
 
-    def cook_item(self, item, order):
-        self.order = order
-        self.order.mark_as_cooking(item)
+    def updater(self, item, order):
+        if item.state == "PLACED":
+            self.order = order
+            self.order.mark_as_cooking(item)
+        elif item.state == "COOKING":
+            self.order = order
+            self.order.mark_as_served(item)
+
+    # These are the cooking and serving item functions seperate
+    # Left here incase we need them for any other reason.
+    # def cook_item(self, item, order):
+    #     self.order = order
+    #     self.order.mark_as_cooking(item)
+    #
+    # def serve_item(self, item, order):
+    #     self.order = order
+    #     self.order.mark_as_served(item)
