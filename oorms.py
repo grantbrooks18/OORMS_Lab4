@@ -159,7 +159,7 @@ class KitchenView(RestaurantView):
 
                             def handler(_, order_item=item):
                                 # TODO: call appropriate method on handler
-                                self.controller.cook_item(order_item,order)
+                                self.controller.updater(order_item,order)
                                 self.restaurant.notify_views()
 
                             self._make_button(button_text, handler,
