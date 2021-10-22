@@ -69,14 +69,16 @@ class Order:
 
     def mark_as_served(self, item):
         item.state = "SERVED"
+    def mark_as_ready(self, item):
+        item.state = "READY"
 
 class OrderItem:
 
-    # TODO: need to represent item state, not just ordered
+    # Done: need to represent item state, not just ordered
     def __init__(self, menu_item):
         self.details = menu_item
         self.__ordered = False
-        self.state = ""
+        self.state = "REQUESTED"
 
     def mark_as_ordered(self):
         self.__ordered = True
@@ -93,7 +95,7 @@ class OrderItem:
 
     def can_be_cancelled(self):
         # TODO: correct implementation based on item state
-        if self.state == "PLACED":
+        if self.state == "PLACED" or self.state == "REQUESTED":
             return True
         return False
 
