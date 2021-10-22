@@ -120,6 +120,12 @@ class ServerView(RestaurantView):
             if item.can_be_cancelled():
 
                 def handler(_, cancelled_item=item):
+                    # Done make this actually cancel the items
+                    self.controller.remove_item(cancelled_item)
+                    self.restaurant.notify_views()
+
+
+
                     pass
 
                 self._make_button('X', handler, size=CANCEL_SIZE, rect_style=CANCEL_STYLE,
