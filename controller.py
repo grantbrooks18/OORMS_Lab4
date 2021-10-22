@@ -47,6 +47,9 @@ class OrderController(Controller):
     def add_item(self, menu_item):
         self.order.add_item(menu_item)
         self.view.update()
+    def remove_item(self, menu_item):
+        self.order.remove_item(menu_item)
+        self.view.update()
 
     def update_order(self):
         self.order.place_new_orders()
@@ -57,6 +60,8 @@ class OrderController(Controller):
         self.order.remove_unordered_items()
         self.view.set_controller(TableController(self.view, self.restaurant, self.table))
         self.restaurant.notify_views()
+
+
 
 
 class KitchenController(Controller):
