@@ -93,7 +93,7 @@ class OrderItem:
 
     def can_be_cancelled(self):
         # TODO: correct implementation based on item state
-        if self.state == "PLACED":
+        if self.state != "COOKING":
             return True
         return False
 
