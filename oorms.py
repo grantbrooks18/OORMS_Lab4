@@ -151,6 +151,8 @@ class KitchenView(RestaurantView):
                             if label == "PLACED":
                                 button_text = "Start cooking"
                             if label == "COOKING":
+                                button_text = "Mark as ready"
+                            if label == "READY":
                                 button_text = "Mark as served"
 
                             def handler(_, order_item=item):

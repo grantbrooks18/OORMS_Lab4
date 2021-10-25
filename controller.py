@@ -77,6 +77,9 @@ class KitchenController(Controller):
             self.order.mark_as_cooking(item)
         elif item.state == "COOKING":
             self.order = order
+            self.order.mark_as_ready(item)
+        elif item.state == "READY":
+            self.order = order
             self.order.mark_as_served(item)
 
     # These are the cooking and serving item functions seperate
