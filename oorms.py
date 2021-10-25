@@ -105,6 +105,7 @@ class ServerView(RestaurantView):
                 self.controller.add_item(menuitem)
 
             self._make_button(item.name, handler, (w, h), (x0, y0))
+
         self._draw_order(order)
         self._make_button('Cancel', lambda event: self.controller.cancel_changes(), location=BUTTON_BOTTOM_LEFT)
         self._make_button('Place Orders', lambda event: self.controller.update_order())
@@ -120,16 +121,11 @@ class ServerView(RestaurantView):
             if item.can_be_cancelled():
 
                 def handler(_, cancelled_item=item):
-                    # Done make this actually cancel the items
                     self.controller.remove_item(cancelled_item)
                     self.restaurant.notify_views()
 
-
-
-                    pass
-
                 self._make_button('X', handler, size=CANCEL_SIZE, rect_style=CANCEL_STYLE,
-                                  location=(x0 - 2*(DOT_SIZE + DOT_MARGIN), y0))
+                                location=(x0 - 2*(DOT_SIZE + DOT_MARGIN), y0))
         self.canvas.create_text(x0, m + len(order.items) * h,
                                 text=f'Total: {order.total_cost():.2f}',
                                 anchor=tk.NW)
