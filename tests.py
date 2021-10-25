@@ -95,9 +95,11 @@ class OORMSTestCase(unittest.TestCase):
         self.assertIsInstance(self.view.controller, OrderController)
         self.assertEqual((UI.ORDER, the_order), self.view.last_UI_created)
         self.assertEqual(1, len(the_order.items))
+        self.assertEqual("REQUESTED", the_order.items[0].state)
         self.assertIsInstance(the_order.items[0], OrderItem)
         self.assertEqual(the_order.items[0].details, the_menu_item)
         self.assertFalse(the_order.items[0].has_been_ordered())
+
 
     def test_order_controller_update_order(self):
         the_order, the_menu_item = self.order_an_item()
@@ -106,6 +108,7 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual((UI.TABLE, self.restaurant.tables[2]), self.view.last_UI_created)
         self.assertEqual(1, len(the_order.items))
         self.assertIsInstance(the_order.items[0], OrderItem)
+        self.assertEqual("PLACED", the_order.items[0].state)
         self.assertEqual(the_order.items[0].details, the_menu_item)
         self.assertTrue(the_order.items[0].has_been_ordered())
 
@@ -127,8 +130,11 @@ class OORMSTestCase(unittest.TestCase):
 
         def check_first_three_items(menu_items, items):
             self.assertEqual(menu_items[0], items[0].details)
+            self.assertEqual("PLACED", the_order.items[0].state)
             self.assertEqual(menu_items[3], items[1].details)
+            self.assertEqual("PLACED", the_order.items[1].state)
             self.assertEqual(menu_items[5], items[2].details)
+            self.assertEqual("PLACED", the_order.items[2].state)
 
         self.assertEqual(3, len(the_order.items))
         check_first_three_items(self.restaurant.menu_items, the_order.items)
@@ -150,5 +156,9 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(5, len(the_order.items))
         check_first_three_items(self.restaurant.menu_items, the_order.items)
         self.assertEqual(self.restaurant.menu_items[1], the_order.items[3].details)
+        self.assertEqual("PLACED", the_order.items[3].state)
         self.assertEqual(self.restaurant.menu_items[2], the_order.items[4].details)
+        self.assertEqual("PLACED", the_order.items[4].state)
+
+    #TODO: Tests for mark as served, start cooking, place order - anything with state changes?
 
