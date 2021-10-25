@@ -64,13 +64,6 @@ class Order:
     def total_cost(self):
         return sum((item.details.price for item in self.items))
 
-    def mark_as_cooking(self, item):
-        item.state = "COOKING"
-
-    def mark_as_served(self, item):
-        item.state = "SERVED"
-    def mark_as_ready(self, item):
-        item.state = "READY"
 
 class OrderItem:
 
@@ -100,6 +93,16 @@ class OrderItem:
 
             return True
         return False
+
+    def mark_as_cooking(self):
+        self.state = "COOKING"
+
+    def mark_as_served(self):
+        self.state = "SERVED"
+
+    def mark_as_ready(self):
+        self.state = "READY"
+
 
 
 class MenuItem:
