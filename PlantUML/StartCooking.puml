@@ -10,9 +10,9 @@ participant "controller :\n KitchenController" as controller
 participant "order :\nOrder" as order
 
 
-Cook -> view ++: Start Cooking
+Cook -> view ++: start_cooking
 view ->controller++: CookItem
-controller->order --: Mark_As_Cooking()
+controller->order --: mark_as_cooking()
 view -> restaurant ++: notify_view()
 
 

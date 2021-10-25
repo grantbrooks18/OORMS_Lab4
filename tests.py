@@ -160,5 +160,46 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(self.restaurant.menu_items[2], the_order.items[4].details)
         self.assertEqual("PLACED", the_order.items[4].state)
 
+    def test_order_controller_marking(self):
+        self.view.controller.table_touched(2)
+        self.view.controller.seat_touched(4)
+        the_menu_item = self.restaurant.menu_items[0]
+        self.view.last_UI_created = None
+        self.view.controller.add_item(the_menu_item)
+
+        self.view.controller.order.mark_as_cooking(the_menu_item)
+        self.assertEqual("COOKING", the_menu_item.state)
+
+        self.view.controller.order.mark_as_ready(the_menu_item)
+        self.assertEqual("READY", the_menu_item.state)
+
+        self.view.controller.order.mark_as_served(the_menu_item)
+        self.assertEqual("SERVED", the_menu_item.state)
+
+    def test_order_controller_has_been_can_be(self):
+        self.view.controller.table_touched(2)
+        self.view.controller.seat_touched(4)
+        the_menu_item = self.restaurant.menu_items[0]
+        self.view.last_UI_created = None
+        self.view.controller.add_item(the_menu_item)
+
+        the_item=self.view.controller.order.items[0]
+
+        the_item.mark_as_ordered()
+        check = the_item.has_been_ordered()
+        self.assertEqual(True, check)
+        self.assertEqual(True, the_item.can_be_cancelled())
+
+        self.view.controller.order.mark_as_served(the_item)
+        check = the_item.has_been_served()
+        self.assertEqual(True, check)
+        self.assertEqual(False, the_item.can_be_cancelled())
+
+
+
+
+
+
+
     #TODO: Tests for mark as served, start cooking, place order - anything with state changes?
 

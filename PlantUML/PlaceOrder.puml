@@ -20,12 +20,16 @@ controller -> order ++: place_new_orders()
 
 loop item in unordered_items()
     order-> item ++: mark_as_ordered()
+    item->item: state: "PLACED"
+    item->item: _ordered: False
 end
+
 create tc
 controller --> tc ++: (view, restaurant, table)
 controller -> view ++: set_controller(tc)
 view->tc: create_ui()
 tc->view++ :create_table_ui(table):
 view -> restaurant ++: notify_view()
+
 
 @enduml
