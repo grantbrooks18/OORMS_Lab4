@@ -8,7 +8,6 @@ from model import Restaurant
 
 
 class RestaurantView(tk.Frame, ABC):
-
     """
     An abstract superclass view.
     """
@@ -119,13 +118,12 @@ class ServerView(RestaurantView):
             dot_style = ORDERED_STYLE if item.has_been_ordered() else NOT_YET_ORDERED_STYLE
             self.canvas.create_oval(x0 - DOT_SIZE - DOT_MARGIN, y0, x0 - DOT_MARGIN, y0 + DOT_SIZE, **dot_style)
             if item.can_be_cancelled():
-
                 def handler(_, cancelled_item=item):
                     self.controller.remove_item(cancelled_item)
                     self.restaurant.notify_views()
 
                 self._make_button('X', handler, size=CANCEL_SIZE, rect_style=CANCEL_STYLE,
-                                location=(x0 - 2*(DOT_SIZE + DOT_MARGIN), y0))
+                                  location=(x0 - 2 * (DOT_SIZE + DOT_MARGIN), y0))
         self.canvas.create_text(x0, m + len(order.items) * h,
                                 text=f'Total: {order.total_cost():.2f}',
                                 anchor=tk.NW)
@@ -146,7 +144,7 @@ class KitchenView(RestaurantView):
                 for order in table.orders:
                     for item in order.items:
                         if item.has_been_ordered() and not item.has_been_served():
-                            # TODO: compute button text based on current state of order
+                            # DONE: compute button text based on current state of order
                             label = item.state
                             if label == "PLACED":
                                 button_text = "Start cooking"
@@ -156,7 +154,7 @@ class KitchenView(RestaurantView):
                                 button_text = "Mark as served"
 
                             def handler(_, order_item=item):
-                                # TODO: call appropriate method on handler
+                                # DONE: call appropriate method on handler
                                 self.controller.updater(order_item)
                                 self.restaurant.notify_views()
 

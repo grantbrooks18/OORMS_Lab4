@@ -81,16 +81,15 @@ class OrderItem:
         return self.__ordered
 
     def has_been_served(self):
-        # TODO: correct implementation based on item state
+        # Done: correct implementation based on item state
         if self.state == "SERVED":
             return True
         return False
 
     def can_be_cancelled(self):
-        # TODO: correct implementation based on item state
+        # DONE: correct implementation based on item state
 
         if self.state == "PLACED" or self.state == "REQUESTED":
-
             return True
         return False
 
@@ -102,7 +101,6 @@ class OrderItem:
 
     def mark_as_ready(self):
         self.state = "READY"
-
 
 
 class MenuItem:
