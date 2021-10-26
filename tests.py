@@ -159,16 +159,18 @@ class OORMSTestCase(unittest.TestCase):
         self.view.last_UI_created = None
         self.view.controller.add_item(the_menu_item)
 
-        self.view.controller.order.mark_as_cooking(the_menu_item)
-        self.assertEqual("COOKING", the_menu_item.state)
+        the_item = self.view.controller.order.items[0]
 
-        self.view.controller.order.mark_as_ready(the_menu_item)
-        self.assertEqual("READY", the_menu_item.state)
+        the_item.mark_as_cooking()
+        self.assertEqual("COOKING", the_item.state)
 
-        self.view.controller.order.mark_as_served(the_menu_item)
-        self.assertEqual("SERVED", the_menu_item.state)
+        the_item.mark_as_ready()
+        self.assertEqual("READY", the_item.state)
 
-    def test_order_controller_has_been_can_be(self):
+        the_item.mark_as_served()
+        self.assertEqual("SERVED", the_item.state)
+
+    def test_order_controller_has_been_can_be_canceled(self):
         self.view.controller.table_touched(2)
         self.view.controller.seat_touched(4)
         the_menu_item = self.restaurant.menu_items[0]
@@ -176,3 +178,27 @@ class OORMSTestCase(unittest.TestCase):
         self.view.controller.add_item(the_menu_item)
 
         the_item = self.view.controller.order.items[0]
+
+        # Checking if it can be canceled before ordered
+        self.assertEqual("REQUESTED", the_item.state)
+        self.assertEqual(True, the_item.can_be_cancelled())
+
+        # Checking if it can be canceled before cooking
+        the_item.mark_as_ordered()
+        self.assertEqual("PLACED", the_item.state)
+        self.assertEqual(True, the_item.can_be_cancelled())
+
+        # Checking if it can be canceled after it's cooking
+        the_item.mark_as_cooking()
+        self.assertEqual("COOKING", the_item.state)
+        self.assertEqual(False, the_item.can_be_cancelled())
+
+        # Checking if it can be cancelled after it's been marked as ready
+        the_item.mark_as_ready()
+        self.assertEqual("READY", the_item.state)
+        self.assertEqual(False, the_item.can_be_cancelled())
+
+        # is it can be canceled after being marked as served.
+        the_item.mark_as_served()
+        self.assertEqual("SERVED", the_item.state)
+        self.assertEqual(False, the_item.can_be_cancelled())

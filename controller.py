@@ -47,6 +47,7 @@ class OrderController(Controller):
     def add_item(self, menu_item):
         self.order.add_item(menu_item)
         self.view.update()
+
     def remove_item(self, menu_item):
         self.order.remove_item(menu_item)
         self.view.update()
@@ -62,32 +63,17 @@ class OrderController(Controller):
         self.restaurant.notify_views()
 
 
-
-
 class KitchenController(Controller):
 
     def create_ui(self):
         self.view.create_kitchen_order_ui()
 
-    # TODO: implement a method to handle button presses on the KitchenView
-
-    def updater(self, item, order):
+    # DONE: implement a method to handle button presses on the KitchenView
+    @staticmethod
+    def updater(item):
         if item.state == "PLACED":
-            self.order = order
-            self.order.mark_as_cooking(item)
+            item.mark_as_cooking()
         elif item.state == "COOKING":
-            self.order = order
-            self.order.mark_as_ready(item)
+            item.mark_as_ready()
         elif item.state == "READY":
-            self.order = order
-            self.order.mark_as_served(item)
-
-    # These are the cooking and serving item functions seperate
-    # Left here incase we need them for any other reason.
-    # def cook_item(self, item, order):
-    #     self.order = order
-    #     self.order.mark_as_cooking(item)
-    #
-    # def serve_item(self, item, order):
-    #     self.order = order
-    #     self.order.mark_as_served(item)
+            item.mark_as_served()
