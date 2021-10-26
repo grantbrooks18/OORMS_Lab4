@@ -2,20 +2,18 @@
 'https://plantuml.com/sequence-diagram
 !include style.puml
 header Brooks and MacDonald
-title Start Cooking
+title Mark as Cooking
 actor Cook
 participant "view :\n KitchenView" as view
 participant "restaurant :\n  Restaurant " as restaurant
 participant "controller :\n KitchenController" as controller
-participant "order :\nOrder" as order
+participant "item :\nItems" as items
 
 
-Cook -> view ++: Start Cooking
-view ->controller++: CookItem
-controller->order --: Mark_As_Cooking()
+Cook -> view ++: Presses button to start cooking
+view ->controller++: updater(order_item)
+controller->items ++: mark_as_cooking()
+items->items: item.state="COOKING"
 view -> restaurant ++: notify_view()
-
-
-
 
 @enduml

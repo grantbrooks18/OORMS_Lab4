@@ -7,18 +7,11 @@ actor Cook
 participant "view : \nKitchenView" as view
 participant "restaurant"
 participant "controller : \nKitchenController" as controller
+participant "items : \nitem" as items
 
-participant "order : \nOrder" as order
-participant "item : \nOrderItem" as items
-
-Cook -> view ++ : Mark As Served
-view ->controller++: has_been_served(OrderItem)
-controller -> order++: has_been_served(OrderItem)
-order-> items++: has_been_served()
-order -> order: remove(OrderItem)
-
-
+Cook -> view ++ : Presses button when item is served
+view ->controller++: updater(order_item)
+controller -> items++: mark_as_served()
+items->items--: item.state="SERVED"
 view->restaurant++: notify_view()
-
-
 @enduml

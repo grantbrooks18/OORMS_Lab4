@@ -9,29 +9,10 @@ participant "view :\n  ServerView" as view
 participant "restaurant :\n  Restaurant " as restaurant
 participant "order :\n OrderController" as controller
 participant "order :\nOrder" as order
-participant "item : \nOrderItem" as OrderItem
-
 
 server -> view ++: Cancel Item
-view -> controller ++: cancel_changes()
-controller -> order ++: remove_unordered_items()
-order -> OrderItem ++: cancelable = can_be_cancelled()
-OrderItem -> order --: Return true
-order -> order : remove_item()
-
-
-
-'So, I misunderstood this one. It was supposed to be the
-'little cancel, not the main cancel on the bottom.
-'loop item in unordered_items()
-'    order-> items ++: mark_as_ordered()
-'end
-'create tc
-'controller --> tc ++: (view, restaurant, table)
-'controller -> view ++: set_controller(tc)
-'
-'view -> view : controller = controller
-
+view -> controller ++: remove_item(cancelled_item)
+controller -> order ++: remove_item()
+order -> order : remove(item)
 view -> restaurant ++: notify_view()
-
 @enduml

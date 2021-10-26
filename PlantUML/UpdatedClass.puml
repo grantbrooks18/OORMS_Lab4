@@ -12,7 +12,7 @@ set_controller()
 }
 
 class "Restaurant" as resto{
-attribute
+
 notify_view()
 
 }
@@ -36,21 +36,23 @@ class "Order" as order{
 remove_unordered_items()
 has_been_served()
 place_new_orders()
-mark_as_cooking()
 remove_item()
 
 }
 
 class "OrderItem" as item{
+str: state
 can_be_cancelled()
 has_been_served()
 mark_as_ordered()
+mark_as_cooking()
+mark_as_ready()
 
 }
 
 class " KitchenController" as kcont{
-has_been_served()
-cook_item()
+
+updater()
 
 }
 
